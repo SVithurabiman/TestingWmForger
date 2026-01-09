@@ -32,6 +32,15 @@ class CIN_MODEL:
         
     @torch.no_grad()
     def _encode_(self,img_list,messages,limit=500):
+        '''
+        Encode messages into images
+        Parameters:
+            img_list: str, path to the folder of images
+            messages: list of torch tensors, each tensor is of shape (1, message_length)
+        Returns:
+            watermarking_imgs: list of torch tensors, each tensor is of shape (1,3, H, W) in range [0,1]
+            org_imgs: list of torch tensors, each tensor is of shape (1,3, H, W) in range [0,1]
+        '''
         imgs=os.listdir(img_list)
         imgs=[os.path.join(img_list,k) for k in imgs]
         org_imgs=[]
@@ -49,6 +58,14 @@ class CIN_MODEL:
     
     @torch.no_grad()
     def _decode_(self,watermarking_imgs):
+        '''
+        Decode messages from images
+        Parameters:
+            watermarking_imgs: list of torch tensors, each tensor is of shape (1,3, H, W) in range [0,1]
+        Returns:
+            decoded_messages: list of numpy arrays, each array is of shape (message_length,)
+        
+        '''
         decoded_messages=[]
         for img in watermarking_imgs:
             img = img.to(self.device)   
