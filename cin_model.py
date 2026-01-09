@@ -6,7 +6,7 @@ from torchvision import transforms
 import os
 from PIL import Image
 class CIN_MODEL:
-    def __init__(self, yml_path = 'CIN/codes/options/opt.yml',path_checkpoint="pth/cinNet&nsmNet.pth"):               
+    def __init__(self, yml_path = 'CIN/codes/options/opt.yml',path_checkpoint="CIN/pth/cinNet&nsmNet.pth"):               
         option_yml = parse_yml(yml_path)
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.opt = dict_to_nonedict(option_yml)
